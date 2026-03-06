@@ -1,0 +1,10 @@
+^C:\LAB3-PROGRAMMING\BUILD\CMAKEFILES\FCBCFA66A55DDE71FE5F8F87F4B2C243\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Lab3-programming -BC:/Lab3-programming/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Lab3-programming/build/Lab3-programming.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
