@@ -52,9 +52,9 @@ int main(int, char**){
     cout<<"Size of vector "<<sizeof(vector)<<endl;
     cout<<"Size of list "<<sizeof(list)<<endl;
 
-    cout<<"array[0]="<<array.front()<<" array["<<N - 1<<"]="<<array.back()<<endl;
-    cout<<"vector[0]="<<vector.front()<<" vector["<<N<<"]="<<vector.back()<<endl;
-    cout<<"list[0]="<<list.front()<<" list["<<N<<"]="<<list.back()<<endl;
+    cout<<"array[0]="<<array.front()<<" array["<<array.size() - 1<<"]="<<array.back()<<endl;
+    cout<<"vector[0]="<<vector.front()<<" vector["<<array.size() - 1<<"]="<<vector.back()<<endl;
+    cout<<"list[0]="<<list.front()<<" list["<<array.size() - 1<<"]="<<list.back()<<endl;
 
 
     return 0;
