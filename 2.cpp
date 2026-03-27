@@ -28,23 +28,44 @@ int main(int, char**){
     vector<int> vector(N);
     list<int> list(N);
 
+    //fill containers
     fillContainer(array);
     fillContainer(vector);
     fillContainer(list);
 
-    array[50] = 999;
+    // insertion
     vector.insert(vector.begin() + 50, 999);
 
     auto it = list.begin();
     for (int i = 0; i < 50; i++) ++it;
     list.insert(it, 999);
 
-    it = list.begin();
-    for (int i = 0; i < 50; i++) ++it;
+    //erase index 25
+    vector.erase(vector.begin() + 25);
 
-    cout<<"Array[50]: "<<array[50]<<endl;
-    cout<<"Vector[50]: "<<vector[50]<<endl;
-    cout<<"List[50]: "<<*(it)<<endl;
+    it = list.begin();
+    for(int i = 0; i < 25; i++) ++it;
+    list.erase(it);
+
+    // erase elements > 500
+    int i = 0;
+    for(auto elem: vector){
+        if (elem > 500)
+        {
+            vector.erase(vector.begin() + i);
+            i--;
+        } 
+        i++;
+    }
+
+    it = list.begin();
+    while (it != list.end()) {
+        if (*it > 500) {
+            it = list.erase(it);  // erase возвращает следующий итератор
+        } else {
+            ++it;
+        }
+    }
 
     cout<<"Size of Array: "<<array.size()<<endl;
     cout<<"Size of Vector: "<<vector.size()<<endl;
