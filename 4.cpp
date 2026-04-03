@@ -38,9 +38,17 @@ bool isVowel(char c) {
     return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
 }
 
-template <typename T>
-void fillContainer(T& container){
-    for (auto& item : container) item = generateRandomWord(randInt(3, 15));
+
+void fillContainers(std::array<std::string, 100>& array, std::vector<std::string>& vector, std::list<std::string>& list){
+    std::string word; 
+    auto it = list.begin();
+    for(int i = 0; i < 100; i++){
+        word = generateRandomWord(randInt(3, 15));
+        array[i] = word;
+        vector[i] = word;
+        *it = word;
+        ++it;
+    }
 }
 
 
@@ -52,9 +60,7 @@ int main(int, char**){
     std::vector<std::string> stringsVector(N);
     std::list<std::string> stringsList(N);
 
-    fillContainer(stringsArray);
-    fillContainer(stringsVector);
-    fillContainer(stringsList);
+    fillContainers(stringsArray, stringsVector, stringsList);
 
     auto processContainer = [&N](const std::string& name, auto& container) {
         std::cout<<std::endl<<"Container "<< name <<std::endl;
