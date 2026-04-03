@@ -1,5 +1,6 @@
 C:/Lab3-programming/build/CMakeFiles/Task1.dir
 C:/Lab3-programming/build/CMakeFiles/Task2.dir
 C:/Lab3-programming/build/CMakeFiles/Task3.dir
+C:/Lab3-programming/build/CMakeFiles/Task4.dir
 C:/Lab3-programming/build/CMakeFiles/ALL_BUILD.dir
 C:/Lab3-programming/build/CMakeFiles/ZERO_CHECK.dir
