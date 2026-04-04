@@ -18,11 +18,11 @@ double timeMs(F&& op) {
 
 
 template<typename Container>
-void fillRandom(Container& c, std::size_t n,
+void fillRandom(Container& container, std::size_t n,
                  std::mt19937& gen, std::uniform_int_distribution<int>& dis) {
-    c.clear();
-    c.resize(n);
-    for(std::size_t i = 0; i < n; ++i) c[i] = dis(gen);
+    container.clear();
+    container.resize(n);
+    for(std::size_t i = 0; i < n; ++i) container[i] = dis(gen);
 }
 
 
@@ -41,10 +41,10 @@ void fillRandom(std::array<T, N>& array,
 
 
 template<typename Container>
-double seqSumIndexed(const Container& c) {
+double seqSumIndexed(const Container& container) {
     return timeMs([&]{
         long long sum = 0;
-        for(std::size_t i = 0; i < c.size(); ++i) sum += c[i];
+        for(std::size_t i = 0; i < container.size(); ++i) sum += container[i];
         (void)sum;
     });
 }
@@ -62,14 +62,14 @@ double seqSumList(const std::list<T>& list) {
 
 
 template<typename Container>
-double randomAccessIndexed(const Container& c) {
+double randomAccessIndexed(const Container& container) {
     return timeMs([&]{
         volatile int x = 0;
-        x ^= c[0];
-        x ^= c[25000];
-        x ^= c[50000];
-        x ^= c[75000];
-        x ^= c[99999];
+        x ^= container[0];
+        x ^= container[25000];
+        x ^= container[50000];
+        x ^= container[75000];
+        x ^= container[99999];
         (void)x;
     });
 }
@@ -95,29 +95,28 @@ double randomAccessList(const std::list<T>& list) {
 
 
 template<typename Container>
-double pushBackContainer(Container& c,
+double pushBackContainer(Container& container,
                       std::mt19937& gen, std::uniform_int_distribution<int>& dis) {
     return timeMs([&]{
-        for(int i = 0; i < 1000; ++i) c.push_back(dis(gen));
+        for(int i = 0; i < 1000; ++i) container.push_back(dis(gen));
     });
 }
 
 
 template<typename Container>
-double insert_middle_indexed(Container& c,
+double insert_middle_indexed(Container& container,
                              std::size_t pos,
                              std::size_t count,
                              std::mt19937& gen,
                              std::uniform_int_distribution<int>& dis) {
     return timeMs([&]{
-        // сдвиг хвоста вправо на count
-        for(std::size_t i = c.size() - 1; i >= pos + count; --i) {
-            c[i] = c[i - count];
-            if(i == pos + count) break; // защита от под underflow
+        for(std::size_t i = container.size() - 1; i >= pos + count; --i) {
+            container[i] = container[i - count];
+            if(i == pos + count) break;
         }
-        // вставляем новые элементы в "дыру"
+
         for(std::size_t i = 0; i < count; ++i) {
-            c[pos + i] = dis(gen);
+            container[pos + i] = dis(gen);
         }
     });
 }
@@ -139,10 +138,10 @@ double insert_middle_list(std::list<T>& list,
 }
 
 template<typename Container>
-double erase_middle_indexed(Container& c, std::size_t pos, std::size_t count) {
+double erase_middle_indexed(Container& container, std::size_t pos, std::size_t count) {
     return timeMs([&]{
-        for(std::size_t i = pos; i + count < c.size(); ++i) {
-            c[i] = c[i + count];
+        for(std::size_t i = pos; i + count < container.size(); ++i) {
+            container[i] = container[i + count];
         }
     });
 }
